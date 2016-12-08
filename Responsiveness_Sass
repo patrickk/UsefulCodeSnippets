@@ -1,0 +1,39 @@
+//For media queries this method ensures flexibility in values put in 
+//can pass in default values too, since min-width would be most often used for $val and 960px for query
+@mixin respond-to ($val: min-width, $query: 960px) {
+  @media ($val: $query) {
+    @content
+  }
+}
+
+.sidebar {
+  border: 1px solid grey;
+  @include respond-to (max-width, 450px) {
+    float: right;
+    width: 50%;
+  }
+}
+
+//Warning: Declarations outside @media cannot be extended inside 
+
+.sidebar {
+  border: 1px solid grey;
+ }
+ 
+ .anotherSideBar {
+  @media (min-width: 850px) {
+    @extend .sidebar //This would not work
+  }
+ }
+ 
+ //Warning: Matching media queries are not combined
+ //Combine manually 
+ 
+ @media (min-width: 500px) {
+  .sidebar {
+    width: 50%;
+  }
+  .anotherSideBar {
+    height: 15%;
+  }
+ }
