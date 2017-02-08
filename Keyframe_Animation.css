@@ -1,0 +1,65 @@
+/*Keyframe animations require creation then assignment of animation */
+
+/*Format.. to CREATEanimation*/
+@keyframes <name-animation> {
+  <step1> {<property>:<value>;}
+  <step2> {<property>:<value>;}
+}
+
+/*Example*/ 
+@keyframes swing {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(10deg);}
+}
+
+/*Format.. to ASSIGN animation*/
+
+#putIdHere {
+ animation: <name-animation> <duration> <delay> <iteration> <timing function>;
+}
+
+/*Example*/ 
+
+#rightLeg {
+  transform-origin: top center; /*Adjust the origin to move the leg from the top and not about the knee*/ 
+  animation: swing 2s 0s infinite ease;
+}
+
+
+/*Multiple step keyframes*/
+/*Necessary to make animation smoother and more fluid*/ 
+@keyframes tap {
+  0%, 100% {transform: translateY(0px);}
+  20%, 80% {transform: scale(0.8);}
+  50% {transform: translateY(5px);}
+}
+
+/*Animate Modal Overlay*/ 
+/*Modal is not visible when not active*/ 
+@keyframes fadeIn {
+  0%/*can be written as from*/ {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100%/*can be written as to*/ {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/*Animation of modal*/
+@keyframes slideUp {
+  from {
+    transform: translateY(400px);
+  }
+  to {
+    transform: translateY(-300px);
+  }
+}
+.modal-overlay.active {
+/*forwards is the fill-mode, where its default value is none. When specified as forwards, 
+it keeps the last animation state(resting state) which is visible*/
+/*The cubic-bezier makes it so that the modal shoots up a bit then comes back down to its resting spot (like a spring when stretched then let go)*/
+  animation: fadeIn 0.25s forwards, slideUp 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;;
+}
+
