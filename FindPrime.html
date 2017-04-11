@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Find Nth Prime</title>
+  </head>
+  <body>
+    <body>
+  <h4>Put in a digit for x prime numbers:</h4>
+  <span>
+    <input type="number" class="digit-input" />
+    <input type="button" class="press-me" value="Find Prime Numbers"/>
+    <input type="button" class="clear" value="Clear All"/>
+  </span>
+  <br>
+  <div class="results">
+    <div class="results-list"></div>
+  </div>
+</body>
+
+  </body>
+
+  <script>
+  (function() {
+//Declare DOM selectors
+var button = document.querySelector(".press-me"),
+  resultsList = document.querySelector(".results-list"),
+  inputField = document.querySelector(".digit-input"),
+  clearAll =
+  document.querySelector(".clear");
+//Add event listeners
+button.addEventListener('click', displayResults, false);
+clearAll.addEventListener('click', function() {
+  inputField.value = "";
+  resultsList.innerHTML = "";
+}, false);
+//Display results
+function displayResults() {
+  resultsList.innerHTML = "Prime Numbers: " + findPrime(inputField.value);
+}
+
+function findPrime(x) {
+  //Initialize empty array to hold prime numbers
+  var primeArr = [];
+  //Start on 2, since 1 isn't considered prime
+  for (var currentNumber = 2; primeArr.length < x; currentNumber++) {
+    //Set condition to true since 2 is a prime number
+    var isPrime = true;
+    //Counter has to be less than currentNumber, and if it isn't it'll skip     right to line 32, where isPrime will be evaluated.
+    //Starting with 1 will require putting in extra checks, since almost         everything is divisible by 1
+    for (var counter = 2; counter < currentNumber; counter++) {
+      if (currentNumber % counter === 0) {
+        //Anything with a remainder of 0 when divided by 2 (besides 2               itself) is NOT a prime number, therefore false.
+        isPrime = false;
+      } else {
+        //Go back out to outer loop's conditional statement
+        null;
+      }
+    }
+    //Checks to see if the isPrime condition is true, and if so, pushes currentNumber to array.
+    if (isPrime) {
+      primeArr.push(currentNumber);
+    } else {
+      console.log(currentNumber + " is not a prime number.");
+    }
+  }
+  return primeArr;
+};
+})();
+  </script>
+</html>
